@@ -46,7 +46,7 @@ jobs:
       - name: Npm run test
         run: npm run test:unit
   
-  build_and_run:
+  build:
     # Finish test before building 
     needs: test
     # The type of runner that the job will run on
@@ -63,17 +63,10 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v3
         with:
-          push: false
-          tags: truth_project
-
-      - name: Run Docker container
-        run: docker run -d -p 8080:8080 --name trust_cont trust_project
-
-      - name: Curl website
-        run: curl http://localhost:8080
-
-      - name: Stop container
-        run: docker stop trust_cont
+          push: true
+          tags: matheves/truth_project:dev
+          cache-from: type=registry,ref=matheves/truth_project:buildcache
+          cache-to: type=registry,ref=matheves/truth_project:buildcache,mode=max
       
   release:
     if: github.event_name == 'release'
