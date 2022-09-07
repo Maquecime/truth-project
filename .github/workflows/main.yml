@@ -43,6 +43,8 @@ jobs:
         with:
           push: true
           tags: matheves/truth_project:latest
+          cache-from: type=registry,ref=matheves/truth_project:buildcache
+          cache-to: type=registry,ref=matheves/truth_project:buildcache,mode=max
 
       # # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       # - uses: actions/checkout@v3
