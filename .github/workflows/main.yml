@@ -67,7 +67,7 @@ jobs:
           tags: truth_project
 
       - name: Run Docker container
-        run: docker run -d -p 8080:8080 trust_cont trust_project
+        run: docker run -d -p 8080:8080 --name trust_cont trust_project
 
       - name: Curl website
         run: curl http://localhost:8080
