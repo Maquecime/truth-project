@@ -1,9 +1,9 @@
 <script setup>
-import TheWelcome from "../components/TheWelcome.vue";
+import ResultView from "../components/ResultView.vue";
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <ResultView />
   </main>
 </template>
