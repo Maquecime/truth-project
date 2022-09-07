@@ -61,7 +61,10 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - name: Build Docker image
-        run: docker build -t trust_project .
+        uses: docker/build-push-action@v3
+        with:
+          push: false
+          tags: truth_project
 
       - name: Run Docker container
         run: docker run -d -p 8080:8080 trust_cont trust_project
