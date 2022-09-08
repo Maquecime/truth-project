@@ -12,7 +12,7 @@ import { useStore } from "vuex";
 const store = useStore();
 
 function generate() {
-  return store.dispatch("fetchUserName");
+  return store.dispatch("fetchProfile");
 }
 </script>
 

@@ -1,8 +1,8 @@
 <template>
-<div>
-  <h3 >{{userName}}</h3>
-  <p> Testing </p>
-</div>
+  <div>
+    <h3>{{ fullName }}</h3>
+    <p>Testing</p>
+  </div>
 </template>
 
 <script>
@@ -14,16 +14,15 @@ export default {
 
   setup() {
     const store = useStore();
-    let userName = computed(function () {
-      return store.state.userName;
+    let fullName = computed(function () {
+      return store.state.fullName;
     });
 
     return {
-      userName,
+      fullName,
     };
   },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
