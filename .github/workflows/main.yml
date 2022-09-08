@@ -72,10 +72,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set Docker image tag
-        if: github.event_name == 'release'
-        run: echo 'latest' >> $DOCKER_TAG
-
       - name: Build Docker image
         uses: docker/build-push-action@v3
         with:
