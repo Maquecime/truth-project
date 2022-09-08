@@ -1,1 +1,1 @@
-FROM matheves/truth_project:latest
+FROM matheves/truth_project:dev
