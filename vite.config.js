@@ -6,7 +6,8 @@ import vue from "@vitejs/plugin-vue";
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    port: 8080,
+    port: 80,
+    // match network host with container network
     host: '0.0.0.0'
   },
   plugins: [vue()],
