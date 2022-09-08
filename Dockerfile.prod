@@ -1,1 +1,2 @@
+# Get docker image of the project
 FROM matheves/truth_project:dev
