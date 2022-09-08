@@ -83,7 +83,7 @@ jobs:
           cache-to: type=registry,ref=matheves/truth_project:buildcache,mode=max
 
   release:
-    #if: github.event_name == 'release'
+    if: github.event_name == 'release'
     needs: [test, build]
 
     runs-on: ubuntu-latest
