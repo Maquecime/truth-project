@@ -17,15 +17,25 @@ You can access to our last release [here](https://truth-project.herokuapp.com)
 
 ## How to run it
 
-You can run it by yourself :
+You can run it by yourself with docker or without.
+First clone this repository in a local folder.
+Then open a terminal in this folder.
 
-- clone this repository
-- in the project folder open a terminal and execute the following commands
+### Without docker
+
+- ``` npm run dev ```
+- *note: be sure to have npm installed on your computer* 
+
+### With docker
+
 - ``` docker build -t image_name . ```
 - *note: replace image_name by the name you want*
 - ``` docker run -p 8080:8080 --env PORT=8080 image_name ```
 - *note: replace image_name by the name you put before*
-- Now you can access it on [localhost:8080](http://localhost:8080)
+
+### Access it
+
+In both cases you can access it on [localhost:8080](http://localhost:8080)
 
 ## Developer section
 
