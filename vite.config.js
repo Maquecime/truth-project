@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     port: 8080,
     // match network host with container network
-    host: '0.0.0.0'
+    host: "0.0.0.0",
   },
   plugins: [vue()],
   resolve: {
