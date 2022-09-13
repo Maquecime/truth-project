@@ -11,9 +11,21 @@ Nowadays it is quite impossible to be anonymous on the internet.
 One solution is to create new profile and use them to hide your activity.
 Trust project help you to create such credible profile.
 
+## How to access trust project
+
+You can access to our last release [here](https://truth-project.herokuapp.com)
+
 ## How to run it
 
-TODO
+You can run it by yourself :
+
+- clone this repository
+- in the project folder open a terminal and execute the following commands
+- ``` docker build -t image_name . ```
+- *note: replace image_name by the name you want*
+- ``` docker run -p 8080:8080 --env PORT=8080 image_name ```
+- *note: replace image_name by the name you put before*
+- Now you can access it on [localhost:8080](http://localhost:8080)
 
 ## Developer section
 
