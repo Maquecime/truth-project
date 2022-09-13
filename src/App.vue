@@ -1,5 +1,5 @@
 <script setup>
-import HelloWorld from "./components/HelloWorld.vue";
+import HomeView from "./views/HomeView.vue";
 </script>
 
 <template>
@@ -13,11 +13,9 @@ import HelloWorld from "./components/HelloWorld.vue";
     />
 
     <div class="wrapper">
-      <HelloWorld />
+      <HomeView />
     </div>
   </header>
-
-  <RouterView />
 </template>
 
 <style scoped>
