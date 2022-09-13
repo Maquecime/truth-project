@@ -5,7 +5,7 @@ import { faker } from "@faker-js/faker";
 export default createStore({
   state: {
     fullName: "",
-    picture: "",
+    picture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjo39W-qX_H92HpCstPe4gWvQ9R3xgfw5hee2LD_T27HzQIUft3jtser8mnjDN4bTStrA&usqp=CAU",
     age: "",
     nationality: "",
     kanye: "",
