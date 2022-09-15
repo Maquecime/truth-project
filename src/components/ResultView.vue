@@ -6,40 +6,53 @@
     />
 
     <div class="card" style="width: 80%">
-      <div class="card-avatar">
-        <img :src="picture" style="border-radius:100%; padding: 10px" />
-      </div>
-      <div class="card-details">
-        <div class="name">{{ fullName }}</div>
-        <div class="occupation">Insert Job here</div>
+        <div class="card-avatar">
+          <img
+            :src="picture"
+            style="border-radius: 100%; padding: 10px; max-width: 200px"
+          />
+        </div>
+        <div class="card-details">
+          <div class="name">{{ fullName }}</div>
+          <div class="occupation">Insert Job here</div>
 
-        <div class="card-about">
-          <div class="item">
-            <span class="value">{{ age }}</span>
-            <span class="label">Age</span>
+          <div class="card-about">
+            <div class="item">
+              <span class="label">Age</span>
+              <span class="value">{{ age }}</span>
+            </div>
+            <div class="item">
+              <span class="label">Nationality</span>
+              <span class="value">{{ nationality }} </span>
+            </div>
+            <div class="item">
+              <span class="label">Gender</span>
+              <span class="value">{{ gender }} </span>
+            </div>
           </div>
-          <div class="item">
-            <span class="value">{{ nationality }} </span>
-            <span class="label">Nationality</span>
+          <div class="skills">
+            <span class="value">{{ kanye }}</span>
           </div>
+          <MainLoader v-if="isLoading"> </MainLoader>
         </div>
-        <div class="skills">
-          <span class="value">{{ kanye }}</span>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
+import MainLoader from "@/components/utils/MainLoader.vue";
 import { computed } from "vue";
 import { useStore } from "vuex";
 
 export default {
   name: "ResultView",
+  components: { MainLoader },
 
   setup() {
     const store = useStore();
+    let isLoading = computed(function () {
+      return store.state.isLoading;
+    });
     let fullName = computed(function () {
       return store.state.fullName;
     });
@@ -53,6 +66,9 @@ export default {
     });
     let nationality = computed(function () {
       return store.state.nationality;
+    });
+    let gender = computed(function () {
+      return store.state.gender;
     });
     let kanye = computed(function () {
       return store.state.kanye;
@@ -73,10 +89,12 @@ export default {
       picture,
       age,
       nationality,
+      gender,
       kanye,
       favdish,
       recipe,
       music,
+      isLoading,
     };
   },
 };

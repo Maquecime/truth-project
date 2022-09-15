@@ -1,6 +1,6 @@
 <template>
   <div class="greetings">
-    <button class="button-54" @click="generate"> Generate </button>
+    <button class="button-54" @click="generate">Generate</button>
   </div>
 </template>
 
@@ -48,7 +48,8 @@ h3 {
   cursor: pointer;
   border: 3px solid;
   padding: 0.25em 0.5em;
-  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px,
+    5px 5px 0px 0px;
   position: relative;
   user-select: none;
   -webkit-user-select: none;
@@ -69,7 +70,7 @@ h3 {
 
 @media (min-width: 768px) {
   .button-53 {
-    padding: .75rem 3rem;
+    padding: 0.75rem 3rem;
     font-size: 1.25rem;
   }
 }
