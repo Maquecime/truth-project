@@ -11,14 +11,16 @@ import ActionsView from "../components/ActionsView.vue";
         <ActionsView />
       </a-layout-sider>
       <a-layout-content>
-        <ResultView/>
+        <ResultView />
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 
 <style scoped>
-#main-layout .ant-layout-header, .ant-layout-sider, .ant-layout-footer {
+#main-layout .ant-layout-header,
+.ant-layout-sider,
+.ant-layout-footer {
   background: white !important;
   height: 100%;
 }

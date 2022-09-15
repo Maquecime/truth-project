@@ -23,6 +23,7 @@ Then open a terminal in this folder.
 
 ### Without docker
 
+- ``` npm install ```
 - ``` npm run dev ```
 - *note: be sure to have npm installed on your computer* 
 
