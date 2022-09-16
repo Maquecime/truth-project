@@ -73,6 +73,7 @@ export default createStore({
           await dispatch("fetchPicture").then(() => dispatch("fetchAge"));
         })
         .catch((err) => console.log(err));
+        dispatch("fetchMusic");
       commit("setIsLoading", false);
     },
     async fetchName({ state, commit }) {
@@ -193,6 +194,39 @@ export default createStore({
           console.log(error);
         });
     },
+
+    async fetchMusic({commit}) {
+      var client_id = import.meta.env.VITE_CLIENTID;
+      var accessToken= "?access_token=CXyFeSBw2lAdG41xkuU3LS6a_nwyxwwCz2dCkUohw-rw0C49x2HqP__6_4is5RPx";
+      var maxSong= 2471960;
+      var songID = getRandomInt(1,maxSong);;
+       
+
+      const options = {
+        method: 'GET',
+        url : 'https://api.genius.com/songs/' + songID + accessToken
+      }
+
+      await axios.request(options)
+        .then(res => {
+          console.log(res)
+          if (res.request.status != 200){
+            axios.request(options)
+          }
+          var json = res.data.response
+          var song = json['song'];
+          // console.log(song)
+          document.getElementById("album_pic").innerHTML = "<img src=\""+song['song_art_image_url']+"\"alt=\"Some Awesome Album Art\" style=\"width:50px;height:50px;\">";
+          document.getElementById("song").innerHTML = " Song : <a target=\"_blank\" href="+song['url']+" >"+song['title']+"</a>";
+          document.getElementById("artist").innerHTML = " Artiste : <a target=\"_blank\"  href="+song['primary_artist']['url']+">"+song['primary_artist']['name']+"</a>";
+        })
+        .catch(err => console.log(err))
+
+    }
   },
   modules: {},
 });
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}

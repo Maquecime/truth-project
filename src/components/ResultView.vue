@@ -40,15 +40,6 @@
               </div>
             </div>
           </div>
-          <div class="item">
-            <span class="label">Nationality</span>
-            <span class="value">{{ nationality }} </span>
-          </div>
-          <div class="item">
-            <span class="label">Gender</span>
-            <span class="value">{{ gender }} </span>
-          </div>
-        </div>
         <div class="skills">
           <span class="label">Favorite Kanye quote</span>
           <span class="value">{{ kanye }}</span>
@@ -61,6 +52,7 @@
         <MainLoader v-if="isLoading"> </MainLoader>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
