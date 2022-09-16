@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 import axios from "axios";
 import { faker } from "@faker-js/faker";
 import { getIngredients } from "../methods";
+import { getCalories } from "../methods";
 
 export default createStore({
   state: {
@@ -14,6 +15,7 @@ export default createStore({
     favdish: {},
     ingredients: "",
     music: "",
+    calories: "",
   },
   mutations: {
     setFullName(state, payload) {
@@ -40,11 +42,16 @@ export default createStore({
     setIngredients(state, payload) {
       state.ingredients = payload;
     },
+    setCalories(state, payload) {
+      state.calories = payload;
+    },
   },
   actions: {
     async fetchProfile({ dispatch }) {
       dispatch("fetchName");
-      dispatch("fetchDish");
+      await dispatch("fetchDish").then(() => {
+        dispatch("fetchCalories");
+      });
     },
 
     async fetchName({ commit }) {
@@ -60,6 +67,30 @@ export default createStore({
           return commit("setIngredients", ingredients);
         })
         .catch((err) => console.log(err));
+    },
+
+    async fetchCalories({ state, commit }) {
+      let ingredients = state.ingredients;
+      const options = {
+        method: "GET",
+        url: "https://api.api-ninjas.com/v1/nutrition?query=" + ingredients,
+        headers: {
+          "content-type": "application/json",
+          "X-Api-Key": import.meta.env.VITE_NINJAS_API_KEY,
+        },
+      };
+
+      await axios
+        .request(options)
+        .then(function (response) {
+          let calories = getCalories(response.data);
+          console.log(response);
+          console.log(calories);
+          return commit("setCalories", calories);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   },
   modules: {},

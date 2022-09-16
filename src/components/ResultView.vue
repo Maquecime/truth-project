@@ -29,7 +29,7 @@
         <div class="item">
           <span class="label"> Favorite Dish</span>
           <span class="value"> {{ favdish?.strMeal }}</span>
-          <span class="ingredients">{{ingredients}}</span>
+          <span class="ingredients">{{calories}}</span>
         </div>
       </div>
     </div>
@@ -72,6 +72,9 @@ export default {
     let ingredients = computed(function () {
       return store.state.ingredients;
     });
+    let calories = computed(function () {
+      return store.state.calories;
+    });
 
     return {
       fullName,
@@ -82,6 +85,7 @@ export default {
       favdish,
       music,
       ingredients,
+      calories,
     };
   },
 };
