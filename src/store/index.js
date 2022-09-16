@@ -94,12 +94,13 @@ export default createStore({
     },
     async fetchAge({ state, commit }) {
       let picture = state.picture;
+      let apiKey = import.meta.env.VITE_RAPID_API_KEY != "" ? import.meta.env.VITE_RAPID_API_KEY : import.meta.env.VITE_LOCAL_RAPID_API_KEY;
       const options = {
         method: "POST",
         url: "https://age-detector.p.rapidapi.com/age-detection",
         headers: {
           "content-type": "application/json",
-          "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
+          "X-RapidAPI-Key": apiKey,
           "X-RapidAPI-Host": "age-detector.p.rapidapi.com",
         },
         data: { url: picture },
@@ -131,7 +132,6 @@ export default createStore({
     },
     async fetchJob({ commit }) {
       let job = faker.name.jobTitle()
-      console.log(job)
       return commit("setJob", job);
     },
     async fetchKanye({ commit }) {
