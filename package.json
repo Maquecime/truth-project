@@ -14,6 +14,7 @@
     "ant-design-vue": "^3.2.12",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "country-list-js": "^3.1.7",
     "dotenv": "^16.0.2",
     "vue": "^3.2.36",
     "vue-router": "^4.1.5",

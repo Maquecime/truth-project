@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 // import axios from "axios";
 import { faker } from "@faker-js/faker";
 import axios from "axios";
+import country from 'country-list-js';
 
 export default createStore({
   state: {
@@ -11,6 +12,7 @@ export default createStore({
     age: "",
     nationality: "",
     gender: "",
+    job: "",
     kanye: "",
     favdish: "",
     recipe: "",
@@ -33,6 +35,9 @@ export default createStore({
     setGender(state, payload) {
       state.gender = payload;
     },
+    setJob(state, payload) {
+      state.job = payload;
+    },
     setKanye(state, payload) {
       state.kanye = payload;
     },
@@ -52,9 +57,11 @@ export default createStore({
   actions: {
     async fetchProfile({ dispatch, commit }) {
       commit("setIsLoading", true);
+      dispatch("fetchJob");
+      dispatch("fetchKanye");
       await dispatch("fetchGender")
         .then(async () => {
-          dispatch("fetchName");
+          await dispatch("fetchName").then(() => dispatch("fetchNationality"));
           await dispatch("fetchPicture").then(() => dispatch("fetchAge"));
         })
         .catch((err) => console.log(err));
@@ -62,8 +69,9 @@ export default createStore({
     },
     async fetchName({ state, commit }) {
       let gender = state.gender.toLowerCase();
-      let name = faker.name.fullName({ sex: gender });
-      return commit("setFullName", name);
+      let firstName = faker.name.firstName(gender.toLowerCase());
+      let lastName = faker.name.lastName();
+      return commit("setFullName", firstName.concat(" ", lastName));
     },
     async fetchGender({ commit }) {
       let gender = Math.round(Math.random()) == 0 ? "Male" : "Female";
@@ -86,12 +94,13 @@ export default createStore({
     },
     async fetchAge({ state, commit }) {
       let picture = state.picture;
+      let apiKey = import.meta.env.VITE_RAPID_API_KEY != "" ? import.meta.env.VITE_RAPID_API_KEY : import.meta.env.VITE_LOCAL_RAPID_API_KEY;
       const options = {
         method: "POST",
         url: "https://age-detector.p.rapidapi.com/age-detection",
         headers: {
           "content-type": "application/json",
-          "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
+          "X-RapidAPI-Key": apiKey,
           "X-RapidAPI-Host": "age-detector.p.rapidapi.com",
         },
         data: { url: picture },
@@ -106,6 +115,35 @@ export default createStore({
           console.log(error);
         });
     },
+    async fetchNationality({ state, commit }) {
+      let firstName = state.fullName.split(" ")[0];
+      await axios
+        .get("https://api.nationalize.io", {
+          params: {
+            name: firstName,
+          }
+        })
+        .then(function (response) {
+          return commit("setNationality", country.findByIso2(response.data.country[0].country_id).name);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    },
+    async fetchJob({ commit }) {
+      let job = faker.name.jobTitle()
+      return commit("setJob", job);
+    },
+    async fetchKanye({ commit }) {
+      await axios
+      .get("https://api.kanye.rest")
+      .then(function (response) {
+        return commit("setKanye", response.data.quote);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    }
   },
   modules: {},
 });
