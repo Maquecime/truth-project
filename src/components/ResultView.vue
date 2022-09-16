@@ -6,36 +6,36 @@
     />
 
     <div class="card" style="width: 80%">
-        <div class="card-avatar">
-          <img
-            :src="picture"
-            style="border-radius: 100%; padding: 10px; max-width: 200px"
-          />
-        </div>
-        <div class="card-details">
-          <div class="name">{{ fullName }}</div>
-          <div class="occupation">{{ job }}</div>
+      <div class="card-avatar">
+        <img
+          :src="picture"
+          style="border-radius: 100%; padding: 10px; max-width: 200px"
+        />
+      </div>
+      <div class="card-details">
+        <div class="name">{{ fullName }}</div>
+        <div class="occupation">{{ job }}</div>
 
-          <div class="card-about">
-            <div class="item">
-              <span class="label">Age</span>
-              <span class="value">{{ age }}</span>
-            </div>
-            <div class="item">
-              <span class="label">Nationality</span>
-              <span class="value">{{ nationality }} </span>
-            </div>
-            <div class="item">
-              <span class="label">Gender</span>
-              <span class="value">{{ gender }} </span>
-            </div>
+        <div class="card-about">
+          <div class="item">
+            <span class="label">Age</span>
+            <span class="value">{{ age }}</span>
           </div>
-          <div class="skills">
-            <span class="label">Favorite Kanye quote</span>
-            <span class="value">{{ kanye }}</span>
+          <div class="item">
+            <span class="label">Nationality</span>
+            <span class="value">{{ nationality }} </span>
           </div>
-          <MainLoader v-if="isLoading"> </MainLoader>
+          <div class="item">
+            <span class="label">Gender</span>
+            <span class="value">{{ gender }} </span>
+          </div>
         </div>
+        <div class="skills">
+          <span class="label">Favorite Kanye quote</span>
+          <span class="value">{{ kanye }}</span>
+        </div>
+        <MainLoader v-if="isLoading"> </MainLoader>
+      </div>
     </div>
   </div>
 </template>
@@ -73,7 +73,7 @@ export default {
     });
     let job = computed(function () {
       return store.state.job;
-    })
+    });
     let kanye = computed(function () {
       return store.state.kanye;
     });
@@ -86,6 +86,9 @@ export default {
 
     let music = computed(function () {
       return store.state.music;
+    });
+    let ingredients = computed(function () {
+      return store.state.ingredients;
     });
 
     return {
@@ -100,6 +103,7 @@ export default {
       recipe,
       music,
       isLoading,
+      ingredients,
     };
   },
 };
@@ -220,5 +224,10 @@ svg {
   margin-top: 0.15rem;
   font-size: 0.75rem;
   line-height: 1.25rem;
+}
+
+.ingredients {
+  font-size: x-small;
+  font-style: italic;
 }
 </style>
