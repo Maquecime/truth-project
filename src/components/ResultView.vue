@@ -14,7 +14,7 @@
         </div>
         <div class="card-details">
           <div class="name">{{ fullName }}</div>
-          <div class="occupation">Insert Job here</div>
+          <div class="occupation">{{ job }}</div>
 
           <div class="card-about">
             <div class="item">
@@ -31,6 +31,7 @@
             </div>
           </div>
           <div class="skills">
+            <span class="label">Favorite Kanye quote</span>
             <span class="value">{{ kanye }}</span>
           </div>
           <MainLoader v-if="isLoading"> </MainLoader>
@@ -70,6 +71,9 @@ export default {
     let gender = computed(function () {
       return store.state.gender;
     });
+    let job = computed(function () {
+      return store.state.job;
+    })
     let kanye = computed(function () {
       return store.state.kanye;
     });
@@ -90,6 +94,7 @@ export default {
       age,
       nationality,
       gender,
+      job,
       kanye,
       favdish,
       recipe,
