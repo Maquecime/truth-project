@@ -7,7 +7,7 @@
 
     <div class="card" style="width: 80%">
       <div class="card-avatar">
-        <img :src="picture" style="border-radius:100%; padding: 10px" />
+        <img :src="picture" style="border-radius: 100%; padding: 10px" />
       </div>
       <div class="card-details">
         <div class="name">{{ fullName }}</div>
@@ -25,6 +25,11 @@
         </div>
         <div class="skills">
           <span class="value">{{ kanye }}</span>
+        </div>
+        <div class="item">
+          <span class="label"> Favorite Dish</span>
+          <span class="value"> {{ favdish?.strMeal }}</span>
+          <span class="ingredients">{{ingredients}}</span>
         </div>
       </div>
     </div>
@@ -60,12 +65,12 @@ export default {
     let favdish = computed(function () {
       return store.state.favdish;
     });
-    let recipe = computed(function () {
-      return store.state.recipe;
-    });
 
     let music = computed(function () {
       return store.state.music;
+    });
+    let ingredients = computed(function () {
+      return store.state.ingredients;
     });
 
     return {
@@ -75,8 +80,8 @@ export default {
       nationality,
       kanye,
       favdish,
-      recipe,
       music,
+      ingredients,
     };
   },
 };
@@ -198,4 +203,10 @@ svg {
   font-size: 0.75rem;
   line-height: 1.25rem;
 }
+
+.ingredients{
+  font-size: x-small;
+  font-style: italic;
+}
+
 </style>
