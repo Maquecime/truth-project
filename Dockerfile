@@ -1,11 +1,11 @@
 # develop stage
 FROM node:lts as develop-stage
 WORKDIR /usr/src/app
+ARG VITE_RAPID_API_KEY
+ENV VITE_RAPID_API_KEY=${VITE_RAPID_API_KEY}
 COPY package*.json ./
 RUN yarn install
 COPY . .
-RUN --mount=type=secret,id=rapid_api_key \
-  cat /run/secrets/rapid_api_key >> .env
 # build stage
 FROM develop-stage as build-stage
 RUN yarn build
