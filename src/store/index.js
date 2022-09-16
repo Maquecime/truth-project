@@ -1,8 +1,9 @@
 import { createStore } from "vuex";
-// import axios from "axios";
-import { faker } from "@faker-js/faker";
 import axios from "axios";
-import country from 'country-list-js';
+import { faker } from "@faker-js/faker";
+import country from "country-list-js";
+import { getIngredients } from "../methods";
+import { getCalories } from "../methods";
 
 export default createStore({
   state: {
@@ -14,10 +15,11 @@ export default createStore({
     gender: "",
     job: "",
     kanye: "",
-    favdish: "",
-    recipe: "",
+    favdish: {},
+    ingredients: "",
     music: "",
     isLoading: false,
+    calories: "",
   },
   mutations: {
     setFullName(state, payload) {
@@ -41,14 +43,17 @@ export default createStore({
     setKanye(state, payload) {
       state.kanye = payload;
     },
-    setFavdish(state, payload) {
+    setFavDish(state, payload) {
       state.favdish = payload;
-    },
-    setRecipe(state, payload) {
-      state.recipe = payload;
     },
     setMusic(state, payload) {
       state.music = payload;
+    },
+    setIngredients(state, payload) {
+      state.ingredients = payload;
+    },
+    setCalories(state, payload) {
+      state.calories = payload;
     },
     setIsLoading(state, payload) {
       state.isLoading = payload;
@@ -59,6 +64,9 @@ export default createStore({
       commit("setIsLoading", true);
       dispatch("fetchJob");
       dispatch("fetchKanye");
+      await dispatch("fetchDish").then(() => {
+        dispatch("fetchCalories");
+      });
       await dispatch("fetchGender")
         .then(async () => {
           await dispatch("fetchName").then(() => dispatch("fetchNationality"));
@@ -94,7 +102,10 @@ export default createStore({
     },
     async fetchAge({ state, commit }) {
       let picture = state.picture;
-      let apiKey = import.meta.env.VITE_RAPID_API_KEY != "" ? import.meta.env.VITE_RAPID_API_KEY : import.meta.env.VITE_LOCAL_RAPID_API_KEY;
+      let apiKey =
+        import.meta.env.VITE_RAPID_API_KEY != ""
+          ? import.meta.env.VITE_RAPID_API_KEY
+          : import.meta.env.VITE_LOCAL_RAPID_API_KEY;
       const options = {
         method: "POST",
         url: "https://age-detector.p.rapidapi.com/age-detection",
@@ -121,29 +132,67 @@ export default createStore({
         .get("https://api.nationalize.io", {
           params: {
             name: firstName,
-          }
+          },
         })
         .then(function (response) {
-          return commit("setNationality", country.findByIso2(response.data.country[0].country_id).name);
+          return commit(
+            "setNationality",
+            country.findByIso2(response.data.country[0].country_id).name
+          );
         })
         .catch(function (error) {
           console.log(error);
-        })
+        });
     },
     async fetchJob({ commit }) {
-      let job = faker.name.jobTitle()
+      let job = faker.name.jobTitle();
       return commit("setJob", job);
     },
     async fetchKanye({ commit }) {
       await axios
-      .get("https://api.kanye.rest")
-      .then(function (response) {
-        return commit("setKanye", response.data.quote);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-    }
+        .get("https://api.kanye.rest")
+        .then(function (response) {
+          return commit("setKanye", response.data.quote);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+
+    async fetchDish({ commit, state }) {
+      await axios
+        .get("https://www.themealdb.com/api/json/v1/1/random.php")
+        .then((res) => {
+          commit("setFavDish", res?.data?.meals[0]);
+          let ingredients = getIngredients(state.favdish);
+          return commit("setIngredients", ingredients);
+        })
+        .catch((err) => console.log(err));
+    },
+
+    async fetchCalories({ state, commit }) {
+      let ingredients = state.ingredients;
+      const options = {
+        method: "GET",
+        url: "https://api.api-ninjas.com/v1/nutrition?query=" + ingredients,
+        headers: {
+          "content-type": "application/json",
+          "X-Api-Key": import.meta.env.VITE_NINJAS_API_KEY,
+        },
+      };
+
+      await axios
+        .request(options)
+        .then(function (response) {
+          let calories = getCalories(response.data);
+          console.log(response);
+          console.log(calories);
+          return commit("setCalories", calories);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
   modules: {},
 });
