@@ -37,7 +37,7 @@
         <div class="item">
           <span class="label"> Favorite Dish</span>
           <span class="value"> {{ favdish?.strMeal }}</span>
-          <span class="ingredients">{{calories}}</span>
+          <span class="ingredients">{{ calories }}</span>
         </div>
         <MainLoader v-if="isLoading"> </MainLoader>
       </div>
@@ -85,9 +85,6 @@ export default {
     let favdish = computed(function () {
       return store.state.favdish;
     });
-    let recipe = computed(function () {
-      return store.state.recipe;
-    });
 
     let music = computed(function () {
       return store.state.music;
@@ -108,7 +105,6 @@ export default {
       job,
       kanye,
       favdish,
-      recipe,
       music,
       isLoading,
       ingredients,
@@ -234,7 +230,6 @@ svg {
   font-size: 0.75rem;
   line-height: 1.25rem;
 }
-
 .ingredients {
   font-size: x-small;
   font-style: italic;
