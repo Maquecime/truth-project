@@ -3,6 +3,7 @@ import axios from "axios";
 import { faker } from "@faker-js/faker";
 import country from "country-list-js";
 import { getIngredients } from "../methods";
+import { getCalories } from "../methods";
 
 export default createStore({
   state: {
@@ -18,6 +19,7 @@ export default createStore({
     ingredients: "",
     music: "",
     isLoading: false,
+    calories: "",
   },
   mutations: {
     setFullName(state, payload) {
@@ -50,6 +52,9 @@ export default createStore({
     setIngredients(state, payload) {
       state.ingredients = payload;
     },
+    setCalories(state, payload) {
+      state.calories = payload;
+    },
     setIsLoading(state, payload) {
       state.isLoading = payload;
     },
@@ -59,7 +64,9 @@ export default createStore({
       commit("setIsLoading", true);
       dispatch("fetchJob");
       dispatch("fetchKanye");
-      dispatch("fetchDish");
+      await dispatch("fetchDish").then(() => {
+        dispatch("fetchCalories");
+      });
       await dispatch("fetchGender")
         .then(async () => {
           await dispatch("fetchName").then(() => dispatch("fetchNationality"));
@@ -161,6 +168,30 @@ export default createStore({
           return commit("setIngredients", ingredients);
         })
         .catch((err) => console.log(err));
+    },
+
+    async fetchCalories({ state, commit }) {
+      let ingredients = state.ingredients;
+      const options = {
+        method: "GET",
+        url: "https://api.api-ninjas.com/v1/nutrition?query=" + ingredients,
+        headers: {
+          "content-type": "application/json",
+          "X-Api-Key": import.meta.env.VITE_NINJAS_API_KEY,
+        },
+      };
+
+      await axios
+        .request(options)
+        .then(function (response) {
+          let calories = getCalories(response.data);
+          console.log(response);
+          console.log(calories);
+          return commit("setCalories", calories);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   },
   modules: {},
