@@ -29,10 +29,21 @@
               <span class="label">Gender</span>
               <span class="value">{{ gender }} </span>
             </div>
+            <div class="item">
+              <span class="label">Music</span>
+              <div style="display: flex; flex-direction: row;">
+                <span id="album_pic" ></span>
+                <div style="display: flex; flex-direction: column;">
+                  <span id="song"></span>
+                  <span id="artist"></span>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="skills">
             <span class="value">{{ kanye }}</span>
           </div>
+          
           <MainLoader v-if="isLoading"> </MainLoader>
         </div>
     </div>
