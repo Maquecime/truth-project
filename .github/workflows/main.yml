@@ -82,7 +82,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=registry,ref=${{ env.DOCKER_IMAGE_NAME }}:buildcache
           cache-to: type=registry,ref=${{ env.DOCKER_IMAGE_NAME }}:buildcache,mode=max
-          build-arg: |
+          build-args: |
             "VITE_RAPID_API_KEY=${{ secrets.VITE_RAPID_API_KEY }}"
 
   release:
