@@ -196,14 +196,14 @@ export default createStore({
     },
 
     async fetchMusic() {
-      var accessToken= "?access_token=CXyFeSBw2lAdG41xkuU3LS6a_nwyxwwCz2dCkUohw-rw0C49x2HqP__6_4is5RPx";
+      var accessToken= import.meta.env.VITE_GENIUS_API_KEY
       var maxSong= 2471960;
       var songID = getRandomInt(1,maxSong);;
        
 
       const options = {
         method: 'GET',
-        url : 'https://api.genius.com/songs/' + songID + accessToken
+        url : 'https://api.genius.com/songs/' + songID + "?access_token=" + accessToken
       }
 
       await axios.request(options)
