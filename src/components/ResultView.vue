@@ -9,7 +9,7 @@
       <div class="card-avatar">
         <img
           :src="picture"
-          style="border-radius: 100%; padding: 10px; max-width: 200px"
+          style="border-radius: 100%; padding: 10px; max-width: 300px"
         />
       </div>
       <div class="card-details">
@@ -41,10 +41,10 @@
             </div>
           </div>
         <div class="skills">
-          <span class="label">Favorite Kanye quote</span>
+          <span class="label">Favorite Quote</span>
           <span class="value">{{ kanye }}</span>
         </div>
-        <div class="item">
+        <div class="skills">
           <span class="label"> Favorite Dish</span>
           <span class="value"> {{ favdish?.strMeal }}</span>
           <span class="ingredients">{{ calories }}</span>
