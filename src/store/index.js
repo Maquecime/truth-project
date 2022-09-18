@@ -195,8 +195,7 @@ export default createStore({
         });
     },
 
-    async fetchMusic({commit}) {
-      var client_id = import.meta.env.VITE_CLIENTID;
+    async fetchMusic() {
       var accessToken= "?access_token=CXyFeSBw2lAdG41xkuU3LS6a_nwyxwwCz2dCkUohw-rw0C49x2HqP__6_4is5RPx";
       var maxSong= 2471960;
       var songID = getRandomInt(1,maxSong);;
