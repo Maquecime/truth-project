@@ -2,7 +2,8 @@
 
 ## What is Trust Project 
 
-Trust Project is a service that allows you to generate a new identity with
+Trust Project is a service that allows you to generate a new identity with :
+
  - Full Name
  - Job
  - Profile Picture
@@ -12,6 +13,7 @@ Trust Project is a service that allows you to generate a new identity with
  - Favorite Music
  - Favorite Quote
  - Favorite Dish
+  
 This service use several APIs to generate personal information and our algorithms process them to make a credible profile.
 
 ## Why use trust project 
