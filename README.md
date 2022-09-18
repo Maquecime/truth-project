@@ -2,13 +2,22 @@
 
 ## What is Trust Project 
 
-Trust Project is a service that allows you to generate a new identity.
+Trust Project is a service that allows you to generate a new identity with
+ - Full Name
+ - Job
+ - Profile Picture
+ - Age
+ - Nationality
+ - Gender
+ - Favorite Music
+ - Favorite Quote
+ - Favorite Dish
 This service use several APIs to generate personal information and our algorithms process them to make a credible profile.
 
 ## Why use trust project 
 
 Nowadays it is quite impossible to be anonymous on the internet.
-One solution is to create new profile and use them to hide your activity.
+One of the best solution is to create new profile with new identity and use them to hide your activity.
 Trust project help you to create such credible profile.
 
 ## How to access trust project
@@ -20,6 +29,7 @@ You can access to our last release [here](https://truth-project.herokuapp.com)
 You can run it by yourself with docker or without.
 First clone this repository in a local folder.
 Then open a terminal in this folder.
+*Note*: Some used APIs need authentication token in a .env file
 
 ### Without docker
 
