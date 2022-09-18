@@ -104,7 +104,7 @@ export default createStore({
     async fetchAge({ state, commit }) {
       let picture = state.picture;
       let apiKey =
-        import.meta.env.VITE_RAPID_API_KEY != ""
+        import.meta.env.VITE_RAPID_API_KEY != undefined || null || ""
           ? import.meta.env.VITE_RAPID_API_KEY
           : import.meta.env.VITE_LOCAL_RAPID_API_KEY;
       const options = {
@@ -173,12 +173,16 @@ export default createStore({
 
     async fetchCalories({ state, commit }) {
       let ingredients = state.ingredients;
+      let apiKey =
+        import.meta.env.VITE_NINJAS_API_KEY != undefined || null || ""
+          ? import.meta.env.VITE_NINJAS_API_KEY
+          : import.meta.env.VITE_LOCAL_NINJAS_API_KEY;
       const options = {
         method: "GET",
         url: "https://api.api-ninjas.com/v1/nutrition?query=" + ingredients,
         headers: {
           "content-type": "application/json",
-          "X-Api-Key": import.meta.env.VITE_NINJAS_API_KEY,
+          "X-Api-Key": apiKey,
         },
       };
 
@@ -196,14 +200,17 @@ export default createStore({
     },
 
     async fetchMusic() {
-      var accessToken= import.meta.env.VITE_GENIUS_API_KEY
+      let apiKey =
+        import.meta.env.VITE_GENIUS_API_KEY != undefined || null || ""
+          ? import.meta.env.VITE_GENIUS_API_KEY
+          : import.meta.env.VITE_LOCAL_GENIUS_API_KEY;
       var maxSong= 2471960;
       var songID = getRandomInt(1,maxSong);;
        
 
       const options = {
         method: 'GET',
-        url : 'https://api.genius.com/songs/' + songID + "?access_token=" + accessToken
+        url : 'https://api.genius.com/songs/' + songID + "?access_token=" + apiKey
       }
 
       await axios.request(options)
