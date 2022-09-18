@@ -16,20 +16,30 @@
         <div class="name">{{ fullName }}</div>
         <div class="occupation">{{ job }}</div>
 
-        <div class="card-about">
-          <div class="item">
-            <span class="label">Age</span>
-            <span class="value">{{ age }}</span>
+          <div class="card-about">
+            <div class="item">
+              <span class="label">Age</span>
+              <span class="value">{{ age }}</span>
+            </div>
+            <div class="item">
+              <span class="label">Nationality</span>
+              <span class="value">{{ nationality }} </span>
+            </div>
+            <div class="item">
+              <span class="label">Gender</span>
+              <span class="value">{{ gender }} </span>
+            </div>
+            <div class="item">
+              <span class="label">Music</span>
+              <div style="display: flex; flex-direction: row;">
+                <span id="album_pic" ></span>
+                <div style="display: flex; flex-direction: column;">
+                  <span id="song"></span>
+                  <span id="artist"></span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="item">
-            <span class="label">Nationality</span>
-            <span class="value">{{ nationality }} </span>
-          </div>
-          <div class="item">
-            <span class="label">Gender</span>
-            <span class="value">{{ gender }} </span>
-          </div>
-        </div>
         <div class="skills">
           <span class="label">Favorite Kanye quote</span>
           <span class="value">{{ kanye }}</span>
